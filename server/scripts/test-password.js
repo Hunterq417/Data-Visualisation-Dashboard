@@ -9,10 +9,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://shivanshbhardwaj20
 
 async function testPassword() {
   try {
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(MONGODB_URI);
     console.log('Connected to MongoDB');
 
     const user = await User.findOne({ email: 'admin' });

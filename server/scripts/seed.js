@@ -51,7 +51,7 @@ const Record = require('../src/models/Record');
   }));
 
   try {
-    await mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(MONGODB_URI);
     await Record.deleteMany({});
     await Record.insertMany(docs, { ordered: false });
     console.log(`Inserted ${docs.length} documents from ${resolvedPath}.`);
