@@ -11,6 +11,14 @@ export default function Login({ setTheme }){
   const [checkingAuth, setCheckingAuth] = useState(true)
 
   useEffect(() => {
+    // Check for Google auth success parameter
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get('auth') === 'success') {
+      localStorage.setItem('auth', '1');
+      nav('/', { replace: true });
+      return;
+    }
+
     const checkAuth = async () => {
       try {
         const data = await api.getMe()

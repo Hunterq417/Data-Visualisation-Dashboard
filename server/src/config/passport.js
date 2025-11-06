@@ -33,15 +33,19 @@ if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET) {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
+          console.log('Google OAuth profile received:', profile);
+          
           let user = await User.findOne({ googleId: profile.id });
 
           if (user) {
+            console.log('Existing user found by googleId:', user.email);
             return done(null, user);
           }
 
           user = await User.findOne({ email: profile.emails[0].value.toLowerCase() });
 
           if (user) {
+            console.log('Existing user found by email, linking Google account:', user.email);
             user.googleId = profile.id;
             user.provider = 'google';
             user.picture = profile.photos && profile.photos[0] ? profile.photos[0].value : undefined;
@@ -56,9 +60,11 @@ if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET) {
             provider: 'google',
             picture: profile.photos && profile.photos[0] ? profile.photos[0].value : undefined
           });
-
+          
+          console.log('New user created with Google OAuth:', user.email);
           done(null, user);
         } catch (err) {
+          console.error('Google OAuth error:', err);
           done(err, null);
         }
       }

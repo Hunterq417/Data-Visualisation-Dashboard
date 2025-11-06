@@ -109,7 +109,8 @@ router.get('/google/callback',
         maxAge: TOKEN_MAX_AGE
       });
       const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-      res.redirect(frontendUrl);
+      // Redirect with a success parameter
+      res.redirect(`${frontendUrl}?auth=success`);
     } catch (err) {
       console.error('Google OAuth callback error:', err);
       const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
