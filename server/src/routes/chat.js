@@ -15,6 +15,15 @@ router.post('/chat', async (req, res) => {
 
     console.log('Chat request received:', { message, userId: req.userId });
 
+    // Check if Groq API key is configured
+    if (!GROQ_API_KEY) {
+      console.error('GROQ_API_KEY is not set in environment variables');
+      return res.status(500).json({ 
+        error: 'Chat service not configured',
+        message: 'AI chat service is not properly configured on the server.'
+      });
+    }
+
     const systemPrompt = `You are a helpful AI assistant for a data visualization dashboard application. You help users with:
 - Understanding the dashboard and its features
 - Analytics and data visualization
@@ -51,17 +60,28 @@ Provide clear, concise, and helpful responses. Be friendly and professional.`;
       })
     });
 
+    // Check if response is valid JSON
+    const responseText = await groqResponse.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('Failed to parse Groq API response:', {
+        status: groqResponse.status,
+        statusText: groqResponse.statusText,
+        responseText: responseText
+      });
+      throw new Error(`Invalid API response: ${groqResponse.status} - ${responseText.substring(0, 200)}...`);
+    }
+
     if (!groqResponse.ok) {
-      const errorText = await groqResponse.text();
       console.error('Groq API error:', {
         status: groqResponse.status,
         statusText: groqResponse.statusText,
-        body: errorText
+        body: data
       });
-      throw new Error(`Groq API error: ${groqResponse.status} - ${errorText}`);
+      throw new Error(`Groq API error: ${groqResponse.status} - ${JSON.stringify(data)}`);
     }
-
-    const data = await groqResponse.json();
     console.log('Groq API response received');
     
     const aiResponse = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';

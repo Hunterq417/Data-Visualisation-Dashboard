@@ -1,0 +1,39 @@
+const path = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+const User = require('../src/models/User');
+const { verify: verifyPassword } = require('../src/lib/passwords');
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://shivanshbhardwaj2015_db_user:bbbbbbbb@cluster0.zda2259.mongodb.net/';
+
+async function testPassword() {
+  try {
+    await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('Connected to MongoDB');
+
+    const user = await User.findOne({ email: 'admin' });
+    
+    if (user) {
+      console.log('User found with email "admin"');
+      console.log('Password hash:', user.passwordHash);
+      
+      // Test password verification
+      const isValid = await verifyPassword('admin', user.passwordHash);
+      console.log('Password verification result:', isValid);
+    } else {
+      console.log('No user found with email "admin"');
+    }
+
+    await mongoose.connection.close();
+    console.log('Done');
+  } catch (error) {
+    console.error('Error:', error);
+    process.exit(1);
+  }
+}
+
+testPassword();
