@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up • QUEEN</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body class="auth">
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <div class="brand large">
+        <div class="logo">V</div>
+        <span class="brand-name">QUEEN</span>
+      </div>
+      <h1>Welcome back</h1>
+      <p class="muted">Sign in to your dashboard to continue tracking analytics and performance.</p>
+      <div class="hero-visual big">
+        <div class="blob"></div>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card card">
+        <h2>Sign in</h2>
+        <form id="login-form" class="form">
+          <label>Email
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+          <label>Password
+            <div class="password-field">
+              <input id="password" name="password" type="password" minlength="4" placeholder="••••••••" required />
+              <button id="toggle-pass" class="icon-btn" type="button" tabindex="-1" aria-label="Show password">👁</button>
+            </div>
+          </label>
+          <div class="form-row">
+            <label class="checkbox"><input type="checkbox" name="remember" checked /> Remember me</label>
+            <a href="/signup.html" class="link">Create account</a>
+          </div>
+          <button class="btn primary w-full" type="submit">Login</button>
+        </form>
+        <p class="muted small center">Use any email and password for demo.</p>
+      </div>
+      <div class="auth-footer">
+        <button id="theme-toggle" class="icon-btn" title="Toggle theme">☾</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

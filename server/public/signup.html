@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up • QUEEN</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body class="auth">
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <div class="brand large">
+        <div class="logo">V</div>
+        <span class="brand-name">QUEEN</span>
+      </div>
+      <h1>Create your account</h1>
+      <p class="muted">Join to access the analytics dashboard with modern UI.</p>
+      <div class="hero-visual big">
+        <div class="blob"></div>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card card">
+        <h2>Sign up</h2>
+        <form id="signup-form" class="form">
+          <label>Name
+            <input name="name" type="text" placeholder="Your name" required />
+          </label>
+          <label>Email
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+          <label>Password
+            <div class="password-field">
+              <input id="s-password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required />
+              <button id="s-toggle" class="icon-btn" type="button" tabindex="-1" aria-label="Show password">👁</button>
+            </div>
+          </label>
+          <button class="btn primary w-full" type="submit">Create account</button>
+        </form>
+        <p class="muted small center">Already have an account? <a href="/login.html" class="link">Log in</a></p>
+      </div>
+      <div class="auth-footer">
+        <button id="theme-toggle" class="icon-btn" title="Toggle theme">☾</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
