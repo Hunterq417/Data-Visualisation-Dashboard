@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Analytics Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body class="dashboard">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">V</div>
+      <span class="brand-name">QUEEN</span>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">
+        <div class="nav-title">Dashboards</div>
+        <a class="nav-item" href="#">Dashboards <span class="badge">5</span></a>
+        <a class="nav-item active" href="#">Analytics</a>
+        <a class="nav-item" href="#">CRM</a>
+        <a class="nav-item" href="#">Ecommerce</a>
+        <a class="nav-item" href="#">Academy</a>
+        <a class="nav-item" href="#">Logistics</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-title">Apps & Pages</div>
+        <a class="nav-item" href="#">Ecommerce</a>
+        <a class="nav-item" href="#">Academy</a>
+        <a class="nav-item" href="#">Logistics</a>
+        <a class="nav-item" href="#">Email</a>
+        <a class="nav-item" href="#">Chat</a>
+        <a class="nav-item" href="#">Calendar</a>
+        <a class="nav-item" href="#">Kanban</a>
+        <a class="nav-item" href="#">Invoice</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" placeholder="Search" />
+      </div>
+      <div class="top-actions">
+        <button id="theme-toggle" class="icon-btn" title="Toggle theme">☾</button>
+        <button class="icon-btn" title="Notifications">🔔</button>
+        <button class="avatar" id="avatar-btn" title="Account"></button>
+      </div>
+    </header>
+    <div id="profile-menu" class="menu hidden">
+      <div class="menu-header">
+        <div class="avatar sm"></div>
+        <div>
+          <div class="menu-name" id="menu-name">User</div>
+          <div class="muted small" id="menu-email">user@example.com</div>
+        </div>
+      </div>
+      <button class="menu-item" id="menu-profile">Profile</button>
+      <button class="menu-item" id="menu-theme">Toggle Theme</button>
+      <button class="menu-item danger" id="menu-logout">Logout</button>
+    </div>
+
+    <main class="content grid">
+      <section class="card hero">
+        <div class="hero-body">
+          <h3>Website Analytics</h3>
+          <p class="muted">Total 28.5% Conversion Rate</p>
+          <div class="stats-row">
+            <div class="chip"><span>12h</span> Spend</div>
+            <div class="chip"><span>182</span> Order Size</div>
+            <div class="chip"><span>127</span> Order</div>
+            <div class="chip"><span>23k</span> Items</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="blob"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h4>Average Daily Sales</h4>
+        <p class="muted">Total Sales This Month</p>
+        <div class="kpi">$28,450</div>
+        <div class="chart-wrap">
+          <canvas id="dailySalesChart" height="120"></canvas>
+        </div>
+      </section>
+
+      <section class="card">
+        <h4>Sales Overview</h4>
+        <div class="kpis-row">
+          <div><div class="kpi-label">Order</div><div class="kpi-value">62.2%</div></div>
+          <div><div class="kpi-label">Visits</div><div class="kpi-value">25.5%</div></div>
+        </div>
+        <div class="progress duo">
+          <div class="bar a" style="--w:62"></div>
+          <div class="bar b" style="--w:26"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h4>Revenue vs Expense</h4>
+        <div class="chart-wrap">
+          <canvas id="revExpChart" height="160"></canvas>
+        </div>
+      </section>
+
+      <section class="card">
+        <h4>Channels</h4>
+        <div class="chart-wrap">
+          <canvas id="channelChart" height="160"></canvas>
+        </div>
+      </section>
+
+      <section class="card wide">
+        <h4>Earning Reports</h4>
+        <p class="muted">Weekly Earnings Overview</p>
+        <div class="earning">$468 <span class="trend up">+4.2%</span></div>
+        <div class="bars">
+          <div class="bar" style="--h:30%"></div>
+          <div class="bar" style="--h:45%"></div>
+          <div class="bar" style="--h:40%"></div>
+          <div class="bar" style="--h:55%"></div>
+          <div class="bar" style="--h:80%"></div>
+          <div class="bar" style="--h:35%"></div>
+          <div class="bar" style="--h:25%"></div>
+        </div>
+        <div class="mini-metrics">
+          <div class="mini">
+            <div class="mini-title">Earnings</div>
+            <div class="mini-value">$545.69</div>
+          </div>
+          <div class="mini">
+            <div class="mini-title">Profit</div>
+            <div class="mini-value">$256.34</div>
+          </div>
+          <div class="mini">
+            <div class="mini-title">Expense</div>
+            <div class="mini-value">$74.19</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h4>Support Tracker</h4>
+        <p class="muted">Last 7 Days</p>
+        <div class="support-grid">
+          <div>
+            <div class="kpi big">164</div>
+            <div class="muted">Total Tickets</div>
+            <ul class="list">
+              <li><span class="dot purple"></span>New Tickets <b>142</b></li>
+              <li><span class="dot teal"></span>Open Tickets <b>28</b></li>
+              <li><span class="dot orange"></span>Response Time <b>1 Day</b></li>
+            </ul>
+          </div>
+          <div class="gauge-wrap">
+            <div class="gauge" data-value="85">
+              <div class="gauge-center">
+                <div class="gauge-num">85%</div>
+                <div class="muted small">Completed Task</div>
+              </div>
+            </div>
+            <a class="btn primary" href="#">Buy Now</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button class="floating-gear" title="Settings">⚙</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>
