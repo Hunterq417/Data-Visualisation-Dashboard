@@ -13,11 +13,20 @@ const passport = require('./config/passport');
 const app = express();
 
 // CORS configuration
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  'http://localhost:5173',
-  'http://localhost:5174'
-];
+// CORS configuration
+const getAllowedOrigins = () => {
+  const origins = [
+    'http://localhost:5173',
+    'http://localhost:5174'
+  ];
+
+  if (process.env.FRONTEND_URL) {
+    // Add the frontend URL, stripping any trailing slash
+    origins.push(process.env.FRONTEND_URL.replace(/\/$/, ''));
+  }
+
+  return origins;
+};
 
 app.use(
   cors({
@@ -25,11 +34,14 @@ app.use(
       // Allow requests with no origin (mobile apps, Postman, etc)
       if (!origin) return callback(null, true);
 
+      const allowedOrigins = getAllowedOrigins();
+
       // Check if origin matches allowed origins
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         console.log('CORS blocked origin:', origin);
+        console.log('Allowed origins:', allowedOrigins);
         callback(new Error('Not allowed by CORS'));
       }
     },
